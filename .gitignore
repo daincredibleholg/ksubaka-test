@@ -52,6 +52,7 @@ fabric.properties
 # modules.xml
 # .idea/misc.xml 
 # *.ipr
+.idea
 
 
 ### Java ###
@@ -84,3 +85,5 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+*.jar
