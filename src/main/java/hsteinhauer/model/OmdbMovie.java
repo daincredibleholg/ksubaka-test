@@ -1,17 +1,27 @@
 package hsteinhauer.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hsteinhauer.clients.Media;
 
-public class Movie implements Media {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class OmdbMovie implements Media {
 
 	private final String title;
 	private final String director;
 	private final int year;
+	private final String imdbID;
 
-	public Movie(final String title, final String director, final int year) {
+	@JsonCreator
+	public OmdbMovie(@JsonProperty("Title") final String title,
+					 @JsonProperty("Director") final String director,
+					 @JsonProperty("Year") final int year,
+					 @JsonProperty("imdbID") final String imdbID) {
 		this.title = title;
 		this.director = director;
 		this.year = year;
+		this.imdbID = imdbID;
 	}
 
 	@Override
@@ -34,16 +44,20 @@ public class Movie implements Media {
 		return this.title;
 	}
 
+	public String getImdbId() {
+		return this.imdbID;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Movie movie = (Movie) o;
+		OmdbMovie omdbMovie = (OmdbMovie) o;
 
-		if (year != movie.year) return false;
-		if (getTitle() != null ? !getTitle().equals(movie.getTitle()) : movie.getTitle() != null) return false;
-		return getDirector() != null ? getDirector().equals(movie.getDirector()) : movie.getDirector() == null;
+		if (year != omdbMovie.year) return false;
+		if (getTitle() != null ? !getTitle().equals(omdbMovie.getTitle()) : omdbMovie.getTitle() != null) return false;
+		return getDirector() != null ? getDirector().equals(omdbMovie.getDirector()) : omdbMovie.getDirector() == null;
 
 	}
 
@@ -57,7 +71,7 @@ public class Movie implements Media {
 
 	@Override
 	public String toString() {
-		return "Movie{" +
+		return "OmdbMovie{" +
 				"title='" + title + '\'' +
 				", director='" + director + '\'' +
 				", year=" + year +

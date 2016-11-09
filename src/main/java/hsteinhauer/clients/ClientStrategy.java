@@ -1,11 +1,12 @@
 package hsteinhauer.clients;
 
+import hsteinhauer.exception.ClientException;
 import hsteinhauer.model.MediaType;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ClientStrategy {
 
-	List<Media> search(MediaType type, String searchTerm);
+	Set<Media> search(MediaType type, String searchTerm) throws ClientException;
 
 }
