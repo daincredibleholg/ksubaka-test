@@ -84,9 +84,27 @@ public class OmdbClientTest {
 	public void exceptionIsThrownOnIOProblems() throws Exception {
 		when(mapper.readValue(ArgumentMatchers.<URL>any(), eq(OmdbSearchResult.class))).thenThrow(IOException.class);
 
-		expectedException.expect(ClientException.class);
-
-		omdbClient.search(MediaType.MOVIE, "You will never find me");
+		runExceptionCheckFor(MediaType.MOVIE, "You will never find me");
 	}
 
+	@Test
+	public void nullSearchTermShouldThrowAnException() throws ClientException {
+		runExceptionCheckFor(MediaType.MOVIE, null);
+	}
+
+	@Test
+	public void emptySearchTermShouldThrowAnException() throws ClientException {
+		runExceptionCheckFor(MediaType.MOVIE, "");
+	}
+
+	@Test
+	public void nullTypeThrowsAnException() throws ClientException {
+		runExceptionCheckFor(null, "And Now for Something Completely Different");
+	}
+
+	private void runExceptionCheckFor(MediaType type, String searchTerm) throws ClientException{
+		expectedException.expect(ClientException.class);
+
+		omdbClient.search(type, searchTerm);
+	}
 }

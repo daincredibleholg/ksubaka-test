@@ -36,6 +36,8 @@ public class OmdbClient implements ClientStrategy {
 
 	@Override
 	public Set<Media> search(MediaType type, String searchTerm) throws ClientException {
+		validateParameters(type, searchTerm);
+
 		Set<Media> results;
 
 		try {
@@ -49,6 +51,16 @@ public class OmdbClient implements ClientStrategy {
 		}
 
 		return results;
+	}
+
+	private void validateParameters(MediaType type, String searchTerm) throws ClientException {
+		if (type == null) {
+			throw new ClientException("A valid media type is required");
+		}
+
+		if (searchTerm == null || searchTerm.trim().isEmpty()) {
+			throw new ClientException("Empty search terms are not supported");
+		}
 	}
 
 	private OmdbMovie queryDetails(OmdbSearchImdbReference imdbID, ObjectMapper mapper) {

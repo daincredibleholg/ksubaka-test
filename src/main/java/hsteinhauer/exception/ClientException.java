@@ -6,7 +6,11 @@ public class ClientException extends Exception {
 		super(e);
 	}
 
-	public ClientException(String s, Throwable throwable) {
-		super(s, throwable);
+	public ClientException(String error, Throwable throwable) {
+		super(error, throwable);
+	}
+
+	public ClientException(String error) {
+		super(error);
 	}
 }
