@@ -16,6 +16,8 @@ public class ClientFactory {
 		switch (parameters.getApi()) {
 			case OMDB:
 				return new OmdbClient();
+			case TMDB:
+				return new TmdbClient();
 			default:
 				throw new ClientException("Unsupported API provided.");
 		}
