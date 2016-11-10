@@ -27,14 +27,14 @@ public class Query {
 			QueryParameter parameters = QueryParameter.getInstance();
 
 			Set<Media> foundMedia = executeQuery(parameters);
-			prindMediaInfo(foundMedia);
+			printMediaInfo(foundMedia);
 		} catch (ClientException e) {
 			showErrorAndUsage(e);
 		}
 
 	}
 
-	private void prindMediaInfo(Set<Media> foundMedia) {
+	private void printMediaInfo(Set<Media> foundMedia) {
 		for (Media currentMedia : foundMedia) {
 			System.out.println(String.format("Title: '%s', Year: %d, Director: %s",
 					currentMedia.getTitle(),
