@@ -9,6 +9,10 @@ public class ClientFactory {
 	}
 
 	public static ClientStrategy getClient(QueryParameter parameters) throws ClientException {
+		if (parameters == null || parameters.getApi() == null) {
+			throw new ClientException(new IllegalArgumentException("Query parameters must contain API."));
+		}
+
 		switch (parameters.getApi()) {
 			case OMDB:
 				return new OmdbClient();
