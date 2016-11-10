@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hsteinhauer.exception.ClientException;
 import hsteinhauer.model.MediaType;
 import hsteinhauer.model.OmdbMovie;
+import hsteinhauer.model.QueryParameter;
 import hsteinhauer.model.transfer.OmdbSearchImdbReference;
 import hsteinhauer.model.transfer.OmdbSearchResult;
 import org.apache.logging.log4j.LogManager;
@@ -51,6 +52,11 @@ public class OmdbClient implements ClientStrategy {
 		}
 
 		return results;
+	}
+
+	@Override
+	public Set<Media> search(QueryParameter parameters) throws ClientException {
+		return search (parameters.getType(), parameters.getSearchTitle());
 	}
 
 	private void validateParameters(MediaType type, String searchTerm) throws ClientException {
